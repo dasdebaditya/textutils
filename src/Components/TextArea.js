@@ -8,8 +8,7 @@ export default function TextArea(props) {
   }
 
   const handleClick1=()=>{
-    console.log("Button was clicked again!");
-    setText("Button was clicked again!");
+      setText(text.toLowerCase());
   }
 
   const handleChange=(e)=>{
@@ -17,7 +16,11 @@ export default function TextArea(props) {
     setText(e.target.value);
   }
 
-  const[text, setText] = useState("Default Text!");
+  const cleartext=()=>{
+    setText('');
+  }
+
+  const[text, setText] = useState("");
   return (
     <>
     <div class="container my-5">
@@ -26,13 +29,17 @@ export default function TextArea(props) {
           {props.text}
         </label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" value={text} onChange={handleChange} ></textarea>
-        <button className="btn btn-primary my-3" onClick={handleClick}>Convert!</button>
-        <button className="btn btn-primary my-3 mx-3" onClick={handleClick1}>Convert1!</button>
+        <button className="btn btn-primary my-3" onClick={handleClick}>Convert to Upper Case!</button>
+        <button className="btn btn-primary my-3 mx-3" onClick={handleClick1}>Convert to Lower Case!</button>
+        <button className="btn btn-primary my-3 " onClick={cleartext}>Clear!</button>
       </div>
     </div>
-    <div className="container">
+    <div id="chara" className="container">
       <h1>Text Summary: </h1>
-      <p>23 Words, 234 Characters</p>
+      <p >{text.split(" ").length} Words and {text.length} Characters</p>
+      <p>Time taken to read the text: <b>{0.008*text.split(" ").length}</b> Minutes</p>
+      <h2>Preview</h2>
+      <p>{text}</p>
     </div>
     </>
   );
